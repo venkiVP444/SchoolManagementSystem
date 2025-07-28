@@ -1,0 +1,77 @@
+﻿@model SchoolManagementSystem.Models.Course
+@{
+    ViewData["Title"] = "Delete Course";
+}
+<h1>Delete Course</h1>
+<h3>Are you sure you want to delete this course?</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CreditHours)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CreditHours)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Teacher)
+            </dt>
+            <dd class="col-sm-8">
+                @if (Model.Teacher != null)
+                {
+                    @Html.DisplayFor(model => model.Teacher.FirstName)
+                    @Html.Raw(" ")
+                    @Html.DisplayFor(model => model.Teacher.LastName)
+                }
+                else
+                {
+                    <span class="text-muted">No teacher assigned</span>
+                }
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.StudentCourses)
+            </dt>
+            <dd class="col-sm-8">
+                @Model.StudentCourses?.Count.ToString() ?? "0"
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="alert alert-danger mt-3">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <strong>Warning:</strong> Deleting this course will also remove all student enrollments associated with it.
+</div>
+
+<div class="mt-4">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

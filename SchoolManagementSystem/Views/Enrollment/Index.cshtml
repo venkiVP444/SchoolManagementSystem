@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.StudentCourse>
+@{
+    ViewData["Title"] = "Student Enrollments";
+}
+<h1>Student Enrollments</h1>
+<hr />
+<p>
+    <a asp-action="Create" class="btn btn-primary">Enroll New Student</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Teacher</th>
+            <th>Enrollment Date</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Student.FirstName @item.Student.LastName
+                    <br />
+                    <small class="text-muted">@item.Student.Email</small>
+                </td>
+                <td>
+                    @item.Course.Name
+                    <!-- Removed CourseCode reference -->
+                </td>
+                <td>
+                    @item.Course.Teacher.FirstName @item.Course.Teacher.LastName
+                </td>
+                <td>
+                    @item.EnrollmentDate.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @if (item.Grade.HasValue)
+                    {
+                        @item.Grade.Value.ToString("0.00")
+                    }
+                    else
+                    {
+                        <span class="text-muted">Not graded</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit Grade</a> <!-- Use Id property -->
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <!-- Use Id property -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,100 @@
+﻿@model SchoolManagementSystem.Models.Course
+@{
+    ViewData["Title"] = "Course Details";
+}
+<h1>Course Details</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CreditHours)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CreditHours)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Teacher)
+            </dt>
+            <dd class="col-sm-8">
+                @if (Model.Teacher != null)
+                {
+                    @Html.DisplayFor(model => model.Teacher.FirstName)
+                    @Html.Raw(" ")
+                    @Html.DisplayFor(model => model.Teacher.LastName)
+                }
+                else
+                {
+                    <span class="text-muted">No teacher assigned</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h4>Enrolled Students</h4>
+        @if (Model.StudentCourses != null && Model.StudentCourses.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Grade</th>
+                        <th>Enrollment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enrollment in Model.StudentCourses)
+                    {
+                        <tr>
+                            <td>
+                                @enrollment.Student.FirstName @enrollment.Student.LastName
+                            </td>
+                            <td>
+                                @if (enrollment.Grade.HasValue)
+                                {
+                                    @enrollment.Grade.Value.ToString("0.00")
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Not graded</span>
+                                }
+                            </td>
+                            <td>
+                                @enrollment.EnrollmentDate.ToString("yyyy-MM-dd")
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                No students enrolled in this course.
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+</div>

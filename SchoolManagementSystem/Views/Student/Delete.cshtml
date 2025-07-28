@@ -1,0 +1,62 @@
+﻿@model SchoolManagementSystem.Models.Student
+@{
+    ViewData["Title"] = "Delete Student";
+}
+<h1>Delete Student</h1>
+<h3>Are you sure you want to delete this student?</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Grade)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Grade)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ParentName)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ParentName)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="alert alert-danger mt-3">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <strong>Warning:</strong> Deleting this student will also remove all their enrollment records.
+</div>
+
+<div class="mt-4">
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+    </form>
+</div>

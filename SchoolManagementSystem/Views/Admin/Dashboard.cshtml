@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Students</div>
+                <div class="card-body">
+                    <h2 class="card-title">@ViewBag.TotalStudents</h2>
+                    <a asp-controller="Student" asp-action="Index" class="btn btn-light">View Students</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Teachers</div>
+                <div class="card-body">
+                    <h2 class="card-title">@ViewBag.TotalTeachers</h2>
+                    <a asp-controller="Teacher" asp-action="Index" class="btn btn-light">View Teachers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Courses</div>
+                <div class="card-body">
+                    <h2 class="card-title">@ViewBag.TotalCourses</h2>
+                    <a asp-controller="Course" asp-action="Index" class="btn btn-light">View Courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
